@@ -1,29 +1,25 @@
 package mr
 
 //
-// RPC definitions.
-//
-// remember to capitalize all names.
-//
+// ＲＰＣ定义
+// 记得所有命名首字母大写
 
 import "os"
 import "strconv"
 
-//
-// example to show how to declare the arguments
-// and reply for an RPC.
-//
-
-type ExampleArgs struct {
-	X int
+type TaskReply struct {
+	TaskType int    // 记录任务类型
+	Index    int    // 记录任务编号
+	Filename string // 记录map worker读取的文件名 or reduce写的文件名
+	NReduce  int    // 用于map阶段
 }
 
-type ExampleReply struct {
-	Y int
+type TaskArgs struct {
+	TaskType int // 记录任务类型
+	Index    int // 记录任务编号
 }
 
-// Add your RPC definitions here.
-
+// 在这里引入RPC声明
 
 // Cook up a unique-ish UNIX-domain socket name
 // in /var/tmp, for the coordinator.

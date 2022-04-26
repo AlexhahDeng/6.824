@@ -26,9 +26,9 @@ func main() {
 	if len(os.Args) < 3 {
 		fmt.Fprintf(os.Stderr, "Usage: mrsequential xxx.so inputfiles...\n")
 		os.Exit(1)
-	}
+	}// 判断是否出问题
 
-	mapf, reducef := loadPlugin(os.Args[1])
+	mapf, reducef := loadPlugin(os.Args[1])// 加载插件
 
 	//
 	// read each input file,
@@ -41,7 +41,7 @@ func main() {
 		if err != nil {
 			log.Fatalf("cannot open %v", filename)
 		}
-		content, err := ioutil.ReadAll(file)
+		content, err := ioutil.ReadAll(file)// 读取文件内容
 		if err != nil {
 			log.Fatalf("cannot read %v", filename)
 		}
@@ -54,6 +54,7 @@ func main() {
 	// a big difference from real MapReduce is that all the
 	// intermediate data is in one place, intermediate[],
 	// rather than being partitioned into NxM buckets.
+	// 和真实的mapreduce不一样的是，这里所有的中间结果都在同一个地方，而不是分布在不同的缓冲区
 	//
 
 	sort.Sort(ByKey(intermediate))
